@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp 20/10 - Mẫu 7</title>
+<style>
+  body {
+    background: radial-gradient(circle, #fffbea, #ffe4e1, #ffd1dc);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+  }
+
+  .card {
+    width: 80%;
+    max-width: 700px;
+    height: 450px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 10px groove #ffb347;
+    border-radius: 35px;
+    box-shadow: 0 0 30px rgba(255, 182, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(8px);
+  }
+
+  h1 {
+    color: #ff6699;
+    text-shadow: 0 0 8px #fff, 0 0 12px #ffcc99;
+    font-size: 2.5rem;
+  }
+
+  .icon {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.9;
+    animation: floatIcon 6s ease-in-out infinite;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>🌼 Thiệp Chúc Mừng 20/10 🌼<br><br>(Thêm lời chúc xinh đẹp tại đây 💕)</h1>
+
+    <!-- Icon động bay quanh -->
+    <div class="icon" style="top: 10%; left: 15%;">🌸</div>
+    <div class="icon" style="top: 15%; right: 20%;">💛</div>
+    <div class="icon" style="bottom: 10%; left: 25%;">🌷</div>
+    <div class="icon" style="bottom: 20%; right: 25%;">💖</div>
+    <div class="icon" style="top: 40%; left: 5%;">💫</div>
+    <div class="icon" style="top: 55%; right: 10%;">🌹</div>
+    <div class="icon" style="bottom: 15%; left: 45%;">🎀</div>
+    <div class="icon" style="top: 25%; right: 35%;">✨</div>
+    <div class="icon" style="bottom: 35%; right: 15%;">💐</div>
+    <div class="icon" style="top: 15%; left: 40%;">🎁</div>
+    <div class="icon" style="top: 70%; right: 30%;">💞</div>
+    <div class="icon" style="bottom: 25%; left: 10%;">🌻</div>
+  </div>
+
+  <canvas id="fireworks"></canvas>
+
+  <script>
+    // 🎆 Pháo hoa lung linh pastel
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const fireworks = [];
+
+    function random(min, max) { return Math.random() * (max - min) + min; }
+
+    function createFirework() {
+      const x = random(0, canvas.width);
+      const y = random(canvas.height / 2, canvas.height);
+      const colors = ['#ffcc00', '#ffb6c1', '#ffe4b5', '#ff99cc', '#fffacd'];
+      for (let i = 0; i < 25; i++) {
+        fireworks.push({
+          x, y,
+          vx: random(-3, 3),
+          vy: random(-3, 3),
+          alpha: 1,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+    }
+
+    function drawFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.02;
+        if (p.alpha <= 0) fireworks.splice(i, 1);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    setInterval(createFirework, 900);
+    function loop() {
+      drawFireworks();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>

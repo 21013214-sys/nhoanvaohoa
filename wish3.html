@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp 3 - 20/10</title>
+<style>
+body{background:linear-gradient(135deg,#fff9cc,#ffe066);
+display:flex;justify-content:center;align-items:center;height:100vh;
+font-family:'Segoe UI';overflow:hidden;}
+.card{background:#fffce6;border-radius:30px;border:6px dotted #ffcc00;
+padding:40px;width:80%;max-width:600px;text-align:center;
+box-shadow:0 0 20px rgba(255,200,0,.6);}
+h1{color:#ffbf00;}
+.message{margin-top:40px;color:#b38600;font-style:italic;}
+.corner{position:absolute;font-size:2rem;}
+.tl{top:15px;left:20px;} .tr{top:15px;right:20px;}
+.bl{bottom:15px;left:20px;} .br{bottom:15px;right:20px;}
+.icon{position:absolute;font-size:2rem;animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-25px);}}
+canvas{position:fixed;top:0;left:0;z-index:-1;}
+</style></head>
+<body>
+<div class="card">
+<div class="corner tl">🌼🌻</div><div class="corner tr">☀️🌞</div>
+<div class="corner bl">🍯💛</div><div class="corner br">🌸✨</div>
+<h1>🌼 Chúc Mừng Ngày 20/10 🌻</h1>
+<div class="message">(Bạn viết lời chúc của mình tại đây 💌)</div>
+</div>
+<div class="icon" style="top:10%;left:10%;">☀️</div>
+<div class="icon" style="top:50%;left:5%;animation-delay:1s;">🌻</div>
+<div class="icon" style="bottom:15%;right:20%;animation-delay:2s;">💛</div>
+<div class="icon" style="bottom:25%;left:30%;animation-delay:3s;">✨</div>
+<canvas id="fw"></canvas>
+<script>
+const c=document.getElementById('fw'),x=c.getContext('2d');
+c.width=innerWidth;c.height=innerHeight;let f=[];
+function r(a,b){return Math.random()*(b-a)+a}
+function cf(){let X=r(0,c.width),Y=r(c.height/2,c.height);
+let col=['#ffd700','#fff000','#ffeb99','#ffcc00'];
+for(let i=0;i<30;i++)f.push({x:X,y:Y,vx:r(-3,3),vy:r(-3,3),a:1,col:col[Math.floor(Math.random()*col.length)]})}
+function df(){x.clearRect(0,0,c.width,c.height);
+f.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.a-=.02;if(p.a<=0)f.splice(i,1);
+x.fillStyle=p.col;x.globalAlpha=p.a;x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fill()})}
+setInterval(cf,1000);function l(){df();requestAnimationFrame(l)}l();
+</script>
+</body></html>

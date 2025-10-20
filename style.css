@@ -1,0 +1,77 @@
+body {
+      background-color: #ffe6f2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+    h1 {
+      color: #e75480;
+      text-shadow: 0 0 10px #fff;
+      font-size: 2.5rem;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 25px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff99cc; }
+      to { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff3399; }
+    }
+.bouquet {
+      position: relative;
+      width: 400px;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 60px;
+      height: 100px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .flower:hover {
+      transform: scale(1.2);
+    }
+
+    /* 💐 Vị trí 9 bông hoa */
+    .f1 { top: 100px; left: 30px; }    /* trái ngoài */
+    .f2 { top: 50px; left: 90px; }     /* trái giữa */
+    .f3 { top: 20px; left: 150px; }    /* giữa trên trái */
+    .f4 { top: 10px; left: 210px; }    /* giữa trên giữa */
+    .f5 { top: 20px; left: 270px; }    /* giữa trên phải */
+    .f6 { top: 60px; left: 320px; }    /* phải giữa */
+    .f7 { top: 100px; left: 250px; }   /* phải ngoài */
+    .f8 { top: 130px; left: 160px; }   /* giữa dưới */
+    .f9 { top: 150px; left: 90px; }    /* trái dưới */
+
+    .icon {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.8;
+      animation: floatIcon 5s ease-in-out infinite;
+    }
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
